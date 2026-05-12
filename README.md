@@ -11,12 +11,12 @@ Data files should be placed in the `data/` folder before running the notebooks.
 ## Repository Structure
 
 ```
-├── data/                          # EEG data files (not tracked by git)
+├── data/                          # EEG data files (downloaded)
 ├── src/
 │   ├── preprocessing/
-│   │   └── data_prep.py           # Data preprocessing and augmentation
+│   │   └── data_prep.py           # Data preprocessing
 │   └── models/
-│       └── cvae.py                # CVAE architecture definition
+│       └── cvae.py                # CVAE architecture 
 ├── 01_cvae_experiments.ipynb  # Latent dimension and KL weight experiments
 ├── requirements.txt
 └── README.md
@@ -27,8 +27,6 @@ Data files should be placed in the `data/` folder before running the notebooks.
 **`01_cvae_experiments.ipynb`**
 Systematic experiments varying latent dimension (2–24) and KL divergence weight (1e-4 to 1e-1). Covers latent space visualization (PCA, t-SNE, UMAP), reconstruction quality assessment, and downstream MLP classification. See the notebook summary for key findings.
 
-**`02_supervised_classification.ipynb`** *(in progress)*
-CNN, CNN-LSTM, and CNN-Transformer architectures trained directly on EEG motor imagery data for comparison against the unsupervised CVAE approach.
 
 ## Getting Started
 
