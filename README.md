@@ -1,4 +1,4 @@
- # EEG Motor Imagery — Latent Space Analysis
+ # EEG Motor Imagery:  Latent Space Analysis
 
 This project investigates unsupervised representation learning on EEG motor imagery data using a Convolutional Variational Autoencoder (CVAE), with downstream MLP classification. A supervised sequence modeling comparison is in progress.
 
