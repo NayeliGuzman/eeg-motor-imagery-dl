@@ -8,20 +8,6 @@ This project uses the BCI Competition IV Dataset 2a, a publicly available EEG da
 
 Data files should be placed in the `data/` folder before running the notebooks.
 
-## Repository Structure
-
-```
-├── data/                          # EEG data files (downloaded)
-├── src/
-│   ├── preprocessing/
-│   │   └── data_prep.py           # Data preprocessing
-│   └── models/
-│       └── cvae.py                # CVAE architecture 
-├── 01_cvae_experiments.ipynb  # Latent dimension and KL weight experiments
-├── requirements.txt
-└── README.md
-```
-
 ## Notebooks
 
 **`01_cvae_experiments.ipynb`**
