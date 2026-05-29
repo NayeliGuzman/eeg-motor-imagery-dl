@@ -8,7 +8,8 @@ This project uses the BCI Competition IV Dataset 2a, a publicly available EEG da
 
 
 ## II. Notebooks
-The data was
+**`00_baseline_cnn_lstm.ipynb`**
+This notebook demonstrates the use of data_preprocessing.py to process EEG data and cnn_lstm.py for building a CNN-LSTM classifier.
 
 **`01_cvae_experiments.ipynb`**
 Systematic experiments varying latent dimension (2–24) and KL divergence weight (1e-4 to 1e-1). Covers latent space visualization (PCA, t-SNE, UMAP), reconstruction quality assessment, and downstream MLP classification. See the notebook summary for key findings.
