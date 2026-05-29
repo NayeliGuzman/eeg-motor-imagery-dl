@@ -1,24 +1,24 @@
 import numpy as np
-from tensorflow.keras.utils import to_categorical
+from keras.utils import to_categorical
 
-# ----------------------------
-# Label adjustment
-# ----------------------------
-def adjust_labels(y_train_valid, y_test):
-    y_train_valid = y_train_valid - 769
-    y_test = y_test - 769
-    return y_train_valid, y_test
+# # ----------------------------
+# # Label adjustment
+# # ----------------------------
+# def adjust_labels(y_train_valid, y_test):
+#     y_train_valid = y_train_valid - 769
+#     y_test = y_test - 769
+#     return y_train_valid, y_test
 
 
-# ----------------------------
-# Train/val splitting
-# ----------------------------
-def train_valid_split(X, y, valid_size=375):
-    ind_valid = np.random.choice(len(X), valid_size, replace=False)
-    ind_train = np.array(list(set(range(len(X))) - set(ind_valid)))
+# # ----------------------------
+# # Train/val splitting
+# # ----------------------------
+# def train_valid_split(X, y, valid_size=375):
+#     ind_valid = np.random.choice(len(X), valid_size, replace=False)
+#     ind_train = np.array(list(set(range(len(X))) - set(ind_valid)))
 
-    return (X[ind_train], X[ind_valid],
-            y[ind_train], y[ind_valid])
+#     return (X[ind_train], X[ind_valid],
+#             y[ind_train], y[ind_valid])
 
 
 # ----------------------------
@@ -84,16 +84,6 @@ def format_data(x_train, x_valid, x_test, mode="cvae"):
     # Reshaping the training and validation dataset
     # For VAE we do not need swapaxes calls or cnn style reshaping
     if mode == "cvae":
-        # #Add singleton channel dimension for Conv2D
-        # x_train_cvae = x_train.reshape(X_train.shape[0], X_train.shape[1], X_train.shape[2], 1)
-        # x_valid_cvae = x_valid.reshape(X_valid.shape[0], X_valid.shape[1], X_valid.shape[2], 1)
-        # x_test_cvae  = x_test_prep.reshape(X_test_prep.shape[0], X_test_prep.shape[1], X_test_prep.shape[2], 1)
-        # # x_train_cvae.shape -> (samples, 22, 250, 1)
-
-        # x_train_cvae = x_train   # already (6960, 22, 250, 1)
-        # x_valid_cvae = x_valid
-        # x_test_cvae  = x_test
-
         print('Training shape for CVAE:', x_train.shape)
         print('Validation shape for CVAE:', x_valid.shape)
         print('Test shape for CVAE:', x_test.shape)
@@ -136,7 +126,6 @@ def prepare_dataset(
     """
     Full preprocessing pipeline from raw EEG → model-ready tensors
     """
-    print("RUNNING NEW VERSION OF prepare_dataset")
     ind_valid = np.random.choice(len(X_train_valid), valid_size, replace=False) # len(X_train_valid)=2115
     ind_train = np.array(list(set(range(len(X_train_valid))).difference(set(ind_valid))))
 
@@ -153,7 +142,6 @@ def prepare_dataset(
 
     print('Shape of testing set:',X_test_prep.shape)
     print('Shape of testing labels:',y_test_prep.shape)
-
     print('Shape of training set:',x_train.shape)
     print('Shape of validation set:',x_valid.shape)
     print('Shape of training labels:',y_train.shape)

@@ -1,7 +1,6 @@
-from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import Dense, Activation, Flatten, Dropout
-from tensorflow.keras.layers import Conv2D, LSTM, BatchNormalization, MaxPooling2D, Reshape
-from tensorflow.keras.utils import to_categorical
+from keras.models import Sequential
+from keras.layers import Dense, Flatten, Dropout
+from keras.layers import Conv2D, LSTM, BatchNormalization, MaxPooling2D, Reshape
 
 class CNN_LSTM(Sequential):
   def __init__(self, input_shape=(250,1,22)):
