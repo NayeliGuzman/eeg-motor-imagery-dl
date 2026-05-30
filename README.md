@@ -16,6 +16,8 @@ Systematic experiments varying latent dimension (2–24) and KL divergence weigh
 
 **`02_cnn_experiments.ipynb`** Three models: CNN-LSTM, CNN-LSTM-RESIDUAL, and CNN-CONFORMER architectures are trained to perform classification. The assessment is based on accuracy and loss. The model architectures can be found in `src/models`. 
 
+**`03_shallowconvnet_pytorch.ipynb`** This notebook uses PyTorch to demonstrate the shallow conv net architecture as a classifier for this dataset.  
+
 ## III. Getting Started
 
 1. Clone the repository
