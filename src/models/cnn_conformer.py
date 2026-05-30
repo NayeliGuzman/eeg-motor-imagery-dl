@@ -1,19 +1,13 @@
-import tensorflow as tf
-import pandas as pd
-import numpy as np
-from tensorflow import keras
-from tensorflow.keras import optimizers
-from tensorflow.keras.models import Sequential
-from tensorflow.keras.utils import to_categorical
-
-from tensorflow.keras.layers import (
+import keras
+from keras.models import Sequential
+from keras.layers import (
     Conv2D, MaxPooling2D, Dropout, BatchNormalization,
-    Reshape, Dense, LSTM, Flatten, GlobalAveragePooling1D,
+    Reshape, Dense, GlobalAveragePooling1D,
     LayerNormalization, MultiHeadAttention, DepthwiseConv1D,
     add, Dropout
 )
 
-class FeedForward(tf.keras.layers.Layer):
+class FeedForward(keras.layers.Layer):
     def __init__(self, d_model, ff_dim=256, dropout=0.1):
         super(FeedForward, self).__init__()
         self.dense1    = Dense(ff_dim, activation='gelu')
@@ -29,10 +23,10 @@ class FeedForward(tf.keras.layers.Layer):
         x = self.dense2(x)
         return residual + 0.5 * x
 
-class MultiHeadSelfAttention(tf.keras.layers.Layer):
+class MultiHeadSelfAttention(keras.layers.Layer):
     def __init__(self, d_model, num_heads, dropout=0.1):
         super(MultiHeadSelfAttention, self).__init__()
-        self.attention = tf.keras.layers.MultiHeadAttention(
+        self.attention = keras.layers.MultiHeadAttention(
             num_heads=num_heads,
             key_dim=d_model // num_heads, #128/4 = 32
             dropout=dropout
@@ -47,7 +41,7 @@ class MultiHeadSelfAttention(tf.keras.layers.Layer):
         x = self.dropout(x, training=training)
         return residual + x
 
-class ConformerConvModule(tf.keras.layers.Layer):
+class ConformerConvModule(keras.layers.Layer):
     def __init__(self, d_model, kernel_size=31, dropout=0.1): # kernel size = 31 as in original paper
         super(ConformerConvModule, self).__init__()
         self.layernorm    = LayerNormalization()
@@ -62,16 +56,16 @@ class ConformerConvModule(tf.keras.layers.Layer):
         residual = x
         x = self.layernorm(x)
         x = self.pointwise1(x) # (batch, seq, d_model*2)
-        x, gate = tf.split(x, 2, axis=-1) # split into two (batch, seq, d_model)
-        x = x * tf.sigmoid(gate) # GLU
+        x, gate = keras.ops.split(x, 2, axis=-1) # split into two (batch, seq, d_model)
+        x = x * keras.activations.sigmoid(gate) # GLU
         x = self.depthwise(x, training=training)
         x = self.batchnorm(x, training=training)
-        x = tf.nn.gelu(x)
+        x = keras.activations.gelu(x)
         x = self.pointwise2(x)
         x = self.dropout(x, training=training)
         return residual + x
 
-class ConformerBlock(tf.keras.layers.Layer):
+class ConformerBlock(keras.layers.Layer):
     def __init__(self, d_model, num_heads, ff_dim=256, kernel_size=31, dropout=0.1):
         super(ConformerBlock, self).__init__()
         self.ff1       = FeedForward(d_model, ff_dim, dropout)
@@ -88,7 +82,7 @@ class ConformerBlock(tf.keras.layers.Layer):
         x = self.layernorm(x)
         return x
 
-class CNN_CONFORMER(tf.keras.Model):
+class CNN_CONFORMER(keras.Model):
     def __init__(self, input_shape=(250, 1, 22)):
         super(CNN_CONFORMER, self).__init__()
 

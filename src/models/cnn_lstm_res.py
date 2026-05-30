@@ -1,9 +1,8 @@
+import keras
+from keras.layers import Conv2D, MaxPooling2D, Dropout, BatchNormalization, Flatten, Dense, Reshape, LSTM, add
+from keras.models import Sequential
 
-import tensorflow as tf
-from tensorflow.keras.layers import Conv2D, MaxPooling2D, Dropout, BatchNormalization, Flatten, Dense, Reshape, LSTM, add
-from tensorflow.keras.models import Sequential
-
-class CNN_LSTM_RES(tf.keras.Model):
+class CNN_LSTM_RES(keras.Model):
     def __init__(self, input_shape=(250, 1, 22)):
         super(CNN_LSTM_RES, self).__init__()
 
