@@ -1,0 +1,20 @@
+# Data files
+data/*.npy
+data/BCICIV_2a_gdf/
+data/processed/
+data/newly processed/
+
+# macOS
+.DS_Store
+**/.DS_Store
+
+# Python
+__pycache__/
+**/__pycache__/
+*.pyc
+
+# Model weights
+weights/
+
+# Plots
+plots/
