@@ -1,4 +1,48 @@
 
+"""
+process_raw_data.py
+-------------------
+Raw preprocessing pipeline for BCI Competition IV Dataset 2a.
+Converts raw .gdf files to .npy format for downstream processing.
+
+Preprocessing Steps:
+    1. Load raw .gdf files for subjects A01T-A09T (subject A04T excluded)
+    2. Drop EOG channels (EOG-left, EOG-central, EOG-right), retaining 22 EEG channels
+    3. Apply bandpass filter: 4-40 Hz (standard for motor imagery)
+    4. Extract epochs: tmin=0.5s to tmax=4.496s relative to cue onset
+    5. Remove rejected trials via reject_by_annotation=True
+    6. Split 80/20 per subject with test_size=50, random_state=12345
+    7. Concatenate all subjects and save as .npy files
+
+Subject Exclusion:
+    Subject A04T was excluded due to missing motor imagery classes (feet and tongue)
+    caused by a technical recording problem documented in the dataset description
+    (Brunner et al., 2008). The evaluation file A04E was investigated as a potential
+    supplement but uses different event codes incompatible with the training files.
+
+Output Shapes:
+    X_train_valid.npy : (1904, 22, 1000)
+    y_train_valid.npy : (1904,)
+    person_train_valid.npy : (1904, 1)
+    X_test.npy        : (400, 22, 1000)
+    y_test.npy        : (400,)
+    person_test.npy   : (400, 1)
+
+Note:
+    These shapes differ from the .npy files used in the project notebooks
+    (2115, 22, 1000) and (443, 22, 1000) due to subject exclusion and a
+    slightly different train/test split. This pipeline is provided for
+    reproducibility demonstration purposes.
+
+Usage:
+    bash src/preprocessing/run_preprocessing.sh <input_dir> <output_dir>
+
+Reference:
+    Brunner, C., Leeb, R., Müller-Putz, G., Schlögl, A., & Pfurtscheller, G. (2008).
+    BCI Competition 2008 - Graz data set A. Institute for Knowledge Discovery,
+    Graz University of Technology.
+"""
+
 import os
 import sys
 import numpy as np
