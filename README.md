@@ -1,4 +1,8 @@
- # EEG Motor Imagery:  Classification Task and Latent Space Analysis
+> **Note:** GitHub's notebook renderer is currently affected by a known issue. 
+> Please download the `.ipynb` files to view locally in Jupyter or VS Code. 
+> See [GitHub Community Discussion #197350](https://github.com/orgs/community/discussions/197350) for details.
+ 
+# EEG Motor Imagery:  Classification Task and Latent Space Analysis
 
 This project investigates deep learning approaches for EEG motor imagery classification using the 
 BCI Competition IV Dataset 2a. Experiments include unsupervised representation learning via a 
